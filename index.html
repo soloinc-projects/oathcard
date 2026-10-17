@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Oathcard: the offline civics drill for N-400 applicants. Verified 2025 USCIS bank, no microphone required, $5.99 one-time unlock. iOS and Android.">
+  <meta property="og:title" content="Oathcard — Civics Test Flashcards">
+  <meta property="og:description" content="Study for the USCIS civics interview with verified, current answers. No accounts. No network. No paywall.">
+  <meta property="og:type" content="website">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="canonical" href="https://soloinc-projects.github.io/oathcard/">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232F3C6B'><rect x='3' y='2' width='18' height='20' rx='2'/><path d='M9.5 14.5l3 3 5-7' stroke='%23B8860B' stroke-width='2' fill='none' stroke-linecap='round'/></svg>">
+  <title>Oathcard — Civics Test Flashcards for iOS and Android</title>
+  <style>
+    :root {
+      --color-light-bg-primary: #FFFFFF;
+      --color-light-bg-secondary: #F2F2F7;
+      --color-light-text-primary: #1C1C1E;
+      --color-light-text-secondary: #6B6B70;
+      --color-light-brand-primary: #2F3C6B;
+      --color-light-accent-gold: #B8860B;
+      --color-light-success: #1E7F4F;
+      --color-dark-bg-primary: #0B0E14;
+      --color-dark-bg-secondary: #14171F;
+      --color-dark-text-primary: #F2F2F5;
+      --color-dark-text-secondary: #A4A4AC;
+      --color-dark-brand-primary: #8E9FD6;
+      --color-dark-accent-gold: #E0B84C;
+      --color-dark-success: #4ED18A;
+      --spacing-4: 16px;
+      --spacing-6: 24px;
+      --spacing-8: 32px;
+      --radius-lg: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: var(--color-dark-bg-primary);
+        color: var(--color-dark-text-primary);
+      }
+      h1, h2, h3 { color: var(--color-dark-text-primary); }
+      p, li { color: var(--color-dark-text-primary); }
+      .secondary-text { color: var(--color-dark-text-secondary); }
+      .button-primary {
+        background-color: var(--color-dark-brand-primary);
+        color: var(--color-dark-bg-primary);
+      }
+      .button-primary:hover {
+        opacity: 0.9;
+      }
+      .feature-box {
+        background-color: var(--color-dark-bg-secondary);
+      }
+      .divider {
+        border-color: #2C2F3A;
+      }
+    }
+
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: var(--color-light-bg-primary);
+        color: var(--color-light-text-primary);
+      }
+      h1, h2, h3 { color: var(--color-light-text-primary); }
+      p, li { color: var(--color-light-text-primary); }
+      .secondary-text { color: var(--color-light-text-secondary); }
+      .button-primary {
+        background-color: var(--color-light-brand-primary);
+        color: white;
+      }
+      .button-primary:hover {
+        opacity: 0.9;
+      }
+      .feature-box {
+        background-color: var(--color-light-bg-secondary);
+      }
+      .divider {
+        border-color: #D8D8DC;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: var(--spacing-8) var(--spacing-4);
+      text-align: center;
+      border-bottom: 1px solid;
+      border-color: inherit;
+    }
+
+    .logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--spacing-4);
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .tagline {
+      font-size: 17px;
+      margin-bottom: var(--spacing-8);
+      opacity: 0.8;
+    }
+
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: var(--spacing-8) var(--spacing-4);
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+      margin-bottom: var(--spacing-8);
+    }
+
+    .cta-group a {
+      display: inline-block;
+      padding: var(--spacing-4) var(--spacing-6);
+      text-decoration: none;
+      border-radius: var(--radius-lg);
+      font-weight: 600;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+
+    .button-primary {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .proof-points {
+      margin: var(--spacing-8) 0;
+    }
+
+    .proof-point {
+      margin-bottom: var(--spacing-6);
+      padding: var(--spacing-4);
+      background-color: var(--color-light-bg-secondary);
+      border-radius: var(--radius-lg);
+      border-left: 4px solid;
+      border-left-color: var(--color-light-accent-gold);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .proof-point {
+        background-color: var(--color-dark-bg-secondary);
+        border-left-color: var(--color-dark-accent-gold);
+      }
+    }
+
+    .proof-point h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: var(--spacing-2);
+    }
+
+    .proof-point p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .features {
+      margin: var(--spacing-8) 0;
+    }
+
+    .features h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: var(--spacing-3) 0;
+      padding-left: var(--spacing-4);
+      position: relative;
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .privacy-banner {
+      text-align: center;
+      padding: var(--spacing-4);
+      margin: var(--spacing-8) 0;
+      border-radius: var(--radius-lg);
+      background-color: var(--color-light-bg-secondary);
+      font-size: 15px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .privacy-banner {
+        background-color: var(--color-dark-bg-secondary);
+      }
+    }
+
+    .privacy-banner strong {
+      display: block;
+      margin-bottom: var(--spacing-2);
+    }
+
+    .privacy-banner a {
+      color: inherit;
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    footer {
+      padding: var(--spacing-8) var(--spacing-4);
+      text-align: center;
+      border-top: 1px solid;
+      border-color: inherit;
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-6);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .nav-footer a {
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 28px;
+      }
+      main {
+        padding: var(--spacing-6) var(--spacing-4);
+      }
+      .cta-group {
+        gap: var(--spacing-3);
+      }
+    }
+
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+  </style>
+</head>
+<body>
+  <header>
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="color: var(--color-light-brand-primary);">
+      <path d="M3 2h18a2 2 0 012 2v16a2 2 0 01-2 2H3a2 2 0 01-2-2V4a2 2 0 012-2z" fill="var(--color-light-brand-primary)"/>
+      <path d="M20 4l-8 8" stroke="var(--color-light-accent-gold)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 12l3 3 5-7" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <h1>Oathcard</h1>
+    <p class="tagline">The offline civics drill for N-400 applicants who want verified, current answers and no forced paywalls.</p>
+  </header>
+
+  <main>
+    <div class="cta-group">
+      <a href="https://apps.apple.com/app/oathcard/id6738494125" class="button-primary">Download on iPhone</a>
+      <a href="https://play.google.com/store/apps/details?id=com.soloinc.civicsflashcards" class="button-primary">Get it on Google Play</a>
+    </div>
+
+    <section class="proof-points">
+      <h2 style="font-size: 22px; font-weight: 700; margin-bottom: var(--spacing-4);">Why Oathcard</h2>
+
+      <div class="proof-point">
+        <h3>Verified 2025 Bank</h3>
+        <p>Every question comes from the official USCIS M-1778 civics bank, tested by code. Not a claimed or outdated set—the actual current 128 questions used in real interviews.</p>
+      </div>
+
+      <div class="proof-point">
+        <h3>Current Official Data</h3>
+        <p>State governors and senators update automatically in app. Every answer carries a publication date so you know it's current—closing the exact staleness complaints rivals draw.</p>
+      </div>
+
+      <div class="proof-point">
+        <h3>No Accessibility Barriers</h3>
+        <p>Zero microphone requirement anywhere. Study, quiz, and look up state officials completely offline. One $5.99 unlock, lifetime access—no subscription, no hidden paywalls.</p>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2>What's Included</h2>
+      <ul class="feature-list">
+        <li>Official 2025 USCIS 128-question civics bank</li>
+        <li>Practice interviews with timed, scored results</li>
+        <li>All 50 states + territories with current officials</li>
+        <li>Works completely offline—no internet required</li>
+        <li>Dark mode and large-text accessibility</li>
+        <li>One $5.99 purchase, unlimited use</li>
+      </ul>
+    </section>
+
+    <div class="privacy-banner">
+      <strong>Zero accounts. Zero network calls. Zero data collection.</strong>
+      <a href="/privacy/">Privacy Policy</a> ·
+      <a href="/support/">Support & FAQ</a> ·
+      <a href="/terms/">Terms of Service</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="nav-footer">
+      <a href="/">Home</a> ·
+      <a href="/privacy/">Privacy</a> ·
+      <a href="/support/">Support</a> ·
+      <a href="/terms/">Terms</a>
+    </div>
+    <p>Made by 8086 LLC. Oathcard is an independent app, not affiliated with USCIS or the Department of Homeland Security.</p>
+  </footer>
+</body>
+</html>
